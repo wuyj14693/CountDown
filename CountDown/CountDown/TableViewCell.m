@@ -63,6 +63,7 @@
 }
 
 
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqual:@"timeInterval"]) {
@@ -91,5 +92,8 @@
         self.textLabel.text = [NSString stringWithFormat:@"剩余%ld天%02ld:%02ld:%02ld",  leftTime/(60*60*24),(leftTime/3600)%24, (leftTime/60)%60, leftTime%60];
     }
 }
-
+- (void)dealloc
+{
+    [[TimeCenter shareCenter] removeObserver:self forKeyPath:@"timeInterval"];
+}
 @end
